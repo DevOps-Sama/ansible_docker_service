@@ -1,13 +1,2 @@
 ---
 # vars file for ansible_docker_service
-package_dependencies:
-  - ca-certificates
-  - curl
-  - gnupg
-
-docker_packages:
-  - docker-ce
-  - docker-ce-cli
-  - containerd.io
-  - docker-buildx-plugin
-  - docker-compose-plugin
