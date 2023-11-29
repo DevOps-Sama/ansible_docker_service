@@ -1,0 +1,25 @@
+---
+# tasks file for ansible_docker_service
+- name: Instala dependências
+  ansible.builtin.apt:
+    name: "{{ package_dependencies }}"
+    state: present
+    update_cache: true
+
+- name: Adiciona chave gpg docker
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    keyring: /usr/share/keyrings/docker.gpg
+    state: present
+
+- name: Instala repositorio
+  ansible.builtin.apt_repository:
+    repo: "{{ lookup('template', 'docker.list.j2') }}"
+    state: present
+    filename: docker
+    update_cache: true
+
+- name: Instala pacotes do docker
+  ansible.builtin.apt:
+    name: "{{ docker_packages }}"
+    state: present
